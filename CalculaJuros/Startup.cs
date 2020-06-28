@@ -27,6 +27,7 @@ namespace CalculaJuros
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Add(new ServiceDescriptor(typeof(IJurosService), new JurosService()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
