@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using CalculaJuros.ExtensionMethods;
 
 namespace CalculaJuros.Services
@@ -9,7 +10,9 @@ namespace CalculaJuros.Services
 
         public decimal RetornaTaxaJuros()
         {
-            return 0.01m;
+            HttpClient httpClient = new HttpClient();
+            HttpResponseMessage retorno = httpClient.GetAsync("https://localhost:5001/taxaJuros").Result;
+            return Convert.ToDecimal(retorno.Content.ReadAsStringAsync().Result);
         }
 
         public decimal Calcular(decimal valorInicial, int tempo, decimal taxa)

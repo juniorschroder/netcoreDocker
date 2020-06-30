@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CalculaJuros.Controllers
 {
-    public class ShowMeTheCodeController : Controller
+    [ApiController]
+    [Route("/showmethecode")]
+    public class ShowMeTheCodeController : ControllerBase
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Get()
         {
-            return View();
+            return Content("https://github.com/juniorschroder/netcoreDocker");
         }
     }
 }

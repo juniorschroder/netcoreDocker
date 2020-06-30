@@ -1,4 +1,5 @@
-﻿using CalculaJuros.Services;
+﻿using System;
+using CalculaJuros.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculaJuros.Controllers
@@ -17,7 +18,15 @@ namespace CalculaJuros.Controllers
         [HttpGet]
         public decimal Get(decimal valorinicial, int meses)
         {
-            return _jurosService.Calcular(valorinicial, meses, 0.01m);
+            try
+            {
+                decimal taxaJuros = _jurosService.RetornaTaxaJuros();
+                return _jurosService.Calcular(valorinicial, meses, taxaJuros);
+            }
+            catch (Exception e)
+            {
+                throw new System.Exception("Não foi possível realizar o calculo de juros", e.InnerException);
+            }
         }
     }
 }
